@@ -1,0 +1,7 @@
+---
+- hosts: gogsgrp
+  vars_files:
+  - roles/gogs/vars
+  become: yes
+  roles:
+    - { role: gogs, when: ansible_os_family == "RedHat" } 

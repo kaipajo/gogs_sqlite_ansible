@@ -1,2 +1,3 @@
-# gogs_sqlite_ansible
-Ansible playbook for Gogs install, using sqlite
+# gogs_testi
+
+gogs
