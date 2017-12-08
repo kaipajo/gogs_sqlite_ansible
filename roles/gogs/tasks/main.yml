@@ -1,13 +1,12 @@
 ---
-#- hosts: gogsgrp
- # vars_files:
-  #- vars
-  #become: yes
-  #tasks:
-    # - name: Yum udpate
-    #   yum:
-    #     name: '*'
-    #     state: latest
+    - name: Enable nginx repository
+      copy: src=roles/gogs/files/nginx.repo dest=/etc/yum.repos.d 
+    - name: Install dependency for SELinux configuration
+      package: name=libsemanage-python state=present
+      when: ansible_selinux
+    - name: Allow nginx to do network connects (SELinux)
+      seboolean: name=httpd_can_network_connect state=yes persistent=yes
+      when: ansible_selinux
     - name: Install required packages
       yum:
         name: "{{item}}"
@@ -65,16 +64,22 @@
         name: gogs
         state: started
         enabled: yes
-    # - name: restart node (yum update was run during the playbook)
-    #   become: true
-    #   shell: sleep 2 && shutdown -r now "Reboot triggered by Ansible"
-    #   async: 1
-    #   poll: 0
-    #   ignore_errors: true
-    # - name: Wait for host to come back up
-    #   local_action:
-    #     module: wait_for
-    #     host: "{{ inventory_hostname }}"
-    #     port: 22
-    #     delay: 5
-    #     timeout: 300
+    - name: Start and enable nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+    - name: Remove /etc/nginx/conf.d/default.conf file
+      file: 
+        path: /etc/nginx/conf.d/default.conf 
+        state: absent
+    - name: Copy nginx configuration file
+      copy: 
+        src: roles/gogs/files/gogs.conf 
+        dest: /etc/nginx/conf.d/gogs.conf
+        owner: root 
+        group: root 
+        mode: 644 
+        force: yes
+      notify:
+        - Reload nginx
