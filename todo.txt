@@ -1,2 +1,3 @@
 - Setup nginx in front of gogs
 - Add an option to use postgres or mysql/mariadb
+- create a template for nginx configuration
