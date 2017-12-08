@@ -1,3 +1,1 @@
-# gogs_testi
-
-gogs
+# Gogs ansible installation
