@@ -12,3 +12,8 @@ ansible-playbook -i inventory gogs_setup.yml
 ```
 
 Remember to use --ask-pass and --ask-sudo if not using ssh keys or passwordless sudo. 
+
+
+## Sqlite backups
+
+See *https://sqlite.org/backup.html*
