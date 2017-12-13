@@ -1,6 +1,7 @@
 req_packages: 
 - wget
 - git
+- nginx
 gogs_package: https://cdn.gogs.io/0.11.34/linux_amd64.tar.gz
 gogs_user: gogs
 gogs_dirs:
@@ -8,3 +9,6 @@ gogs_dirs:
 - /data/gogsdb
 - /opt/gogs
 gogs_conf_dir: /opt/gogs/custom/conf/
+gogs_port: 3000
+server_name: localhost
+nginx_port: 80
