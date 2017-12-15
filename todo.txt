@@ -1,6 +1,7 @@
 
 - Add an option to use postgres or mysql/mariadb
 - Add templating for app.ini
+- Add option for debian based distros
 
 Done:
 - Setup nginx in front of gogs
