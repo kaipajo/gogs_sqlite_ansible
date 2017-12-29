@@ -2,7 +2,7 @@
 
 Gogs installation using sqlite. Nginx in front of Gogs. 
 
-- Inventory file contains all host related information. Currently using gogsrp as a host group. 
+- Inventory file contains all host related information. Currently using gogsgrp as a host group. 
 - Variables are set in file roles/gogs/vars 
 
 To run the playbook:
